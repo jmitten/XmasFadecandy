@@ -11,7 +11,8 @@ namespace XmasFadecandy
             var fx = Effects.Create(client,pixels);
             while (true)
             {
-                fx.FadeTwinkleRandom(HSLColor.Red(),new HSLColor(0,0,0),1000,90000);
+                fx.FadeTwinkle(HSLColor.Red(),new HSLColor(0,0,0),1000,20000);
+                fx.FadeTwinkleRandom(5000,20000);
                 fx.TheaterChase(HSLColor.Blue(),100,10000);
                 fx.RainbowTheaterChase(50,10000);
                 
