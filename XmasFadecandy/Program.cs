@@ -1,49 +1,78 @@
-﻿using System;
+﻿using FadecandyController;
+using System;
+using System.Threading;
 
 namespace XmasFadecandy
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+
+    
+        private static void Main(string[] args)
         {
-            Client client = new Client("192.168.0.50", 7890);
-            PixelStrip pixels = new PixelStrip(50);
-            var fx = Effects.Create(client,pixels);
+            var client = new Client("127.0.0.1", 7890);
+            var pixels = new PixelStrip(179);
+            var fx = new PixelEffectsLibrary(client,pixels);
+            
             while (true)
             {
-                fx.FadeTwinkle(HSLColor.Red(),new HSLColor(0,0,0),1000,20000);
-                fx.FadeTwinkleRandom(5000,20000);
-                fx.TheaterChase(HSLColor.Blue(),100,10000);
-                fx.RainbowTheaterChase(50,10000);
+
+                for(var i = 0; i < 4; i++){
+                    fx.GradientWipe(10);
+                }
                 
-                fx.TheaterChase(HSLColor.Red(),100,10000);
-                fx.FadeIn(HSLColor.Blue());
-                fx.FadeOut(HSLColor.Blue());
-                fx.FadeIn(HSLColor.Red(),10);
-                fx.FadeOut(HSLColor.Red(),10);
+                fx.BubbleSort();
+                fx.TwinkleRandom(PixelColor.Black,PixelColor.White,100,15,30000);
+                fx.CrossFade(PixelColor.Blue,PixelColor.Red);
+                fx.Alternate(PixelColor.Red, PixelColor.Green,0.3,30);
+                fx.FadingTwinkle(PixelColor.Red, PixelColor.White,500,30000);
+                fx.FadingTwinkle(PixelColor.Blue, PixelColor.White,500,30000);
+
+                fx.ColorWipe(PixelColor.Red,10,false,false);
+                fx.ColorWipe(PixelColor.Green,10,true,false);
+                fx.ColorWipe(PixelColor.Blue,10,false,false);
+                fx.ColorWipe(PixelColor.White,10,true,false);
+                fx.Strobe(PixelColor.White,10,200,200);
                 
-                fx.FadeIn(new HSLColor(128,0,255),10);
-                fx.CrossFade(new HSLColor(128,0,255), new HSLColor(255,0,0),10);
-                fx.CrossFade(new HSLColor(255,0,0), new HSLColor(0,0,255),10);
-                fx.CrossFade(new HSLColor(0,0,255), new HSLColor(216,128,0),10);
-                fx.CrossFade(new HSLColor(216,128,0), new HSLColor(128,128,128),10);
-                fx.CrossFade(new HSLColor(128,128,128), new HSLColor(255,128,128),10);
-                fx.CrossFade(new HSLColor(255,128,128), new HSLColor(128,255,128),10);
-                fx.CrossFade(new HSLColor(128,255,128), new HSLColor(128,128,255),10);
-                fx.CrossFade(new HSLColor(128,128,255), new HSLColor(0,0,0),10);
-                fx.CrossFade(new HSLColor(0,0,0), new HSLColor(255,0,0),10);
-                fx.CrossFade(new HSLColor(255,0,0), new HSLColor(0,255,0),10);
-                fx.CrossFade(new HSLColor(0,255,0), new HSLColor(0,0,255),10);
-            
-                fx.ColorWipe(HSLColor.Red(),50);
-                fx.ColorWipe(HSLColor.Blue(),50,true);
-                fx.RunningLights(new HSLColor(255,255,0),50,20000);
-                fx.SnowSparkle(new HSLColor(60,60,60),20,200,20000);
-                fx.Alternate(new HSLColor(0,0,255), new HSLColor(255,255,255),500,20000);
-                fx.Alternate(new HSLColor(255,0,0), new HSLColor(0,255,0),500,20000);
-                fx.TwinkleRandom(new HSLColor(0, 0, 255), new HSLColor(255, 255, 255), 50, 4,10000);
-                fx.ColorWheel(30,10000);
+                for(var i = 0; i < 5; i++){
+                    fx.Rainbow(5);
+                }
                 
+                
+
+                for(var i = 0; i < 5; i++){
+                    fx.ColorWheel(5);
+                }
+                
+                fx.Strobe(PixelColor.Red,5,200,200);
+                fx.Strobe(PixelColor.White,5,200,200);
+                fx.Strobe(PixelColor.Blue,5,200,200);
+                
+                fx.TheaterChase(PixelColor.Green,100,5000);
+                fx.TheaterChase(PixelColor.Blue,100,5000);
+                fx.TheaterChase(PixelColor.Red,100,5000);
+                fx.TheaterChase(PixelColor.White,100,5000);
+               
+                fx.Alternate(PixelColor.White, PixelColor.Blue,0.1,60);
+                fx.FadeTwinkleRandom(1000,30000);
+                
+                fx.ColorWipe(PixelColor.White,10);
+                fx.FadeIn(PixelColor.Red);
+                fx.FadeOut(PixelColor.Red);
+                fx.CylonBounce(PixelColor.Red,30,10,50);
+                fx.FadeIn(PixelColor.Green);
+                fx.FadeOut(PixelColor.Green);
+                fx.CylonBounce(PixelColor.Green,30,10,50);
+                fx.FadeIn(PixelColor.Blue);
+                fx.FadeOut(PixelColor.Blue);         
+                fx.CylonBounce(PixelColor.Blue,30,10,50);
+                fx.FadeIn(PixelColor.White);
+                fx.FadeOut(PixelColor.White);
+                fx.CylonBounce(PixelColor.White,30,10,50);
+                
+
+                
+
             }
         }
     }

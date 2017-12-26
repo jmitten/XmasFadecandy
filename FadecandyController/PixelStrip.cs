@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace XmasFadecandy
+namespace FadecandyController
 {
     public class PixelStrip : List<Pixel>
     {
@@ -12,7 +12,7 @@ namespace XmasFadecandy
         public PixelStrip(int size)
         {
             Size = size;
-            for (int i = 0; i < Size; i++)
+            for (var i = 0; i < Size; i++)
             {
                 Add(200, 200, 200);
             }
@@ -23,40 +23,42 @@ namespace XmasFadecandy
             base.Add(new Pixel(obj, obj2, obj3));
             lock (syncObject)
             {
-                while (base.Count > Size)
+                while (Count > Size)
                 {
-                    base.RemoveAt(base.Count);
+                    RemoveAt(Count);
                 }
             }
         }
+
         public void Set(int index, byte obj, byte obj2, byte obj3)
         {
             base[index] = new Pixel(obj, obj2, obj3);
         }
 
-        public void Set(int index, HSLColor color){
+        public void Set(int index, PixelColor color)
+        {
             var c = color.ToRgbPixel();
-            Set(index,c.r,c.g,c.b);
+            Set(index, c.r, c.g, c.b);
         }
+
         public void SetAll(byte obj, byte obj2, byte obj3)
         {
-            for (var i = 0; i < base.Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 base[i] = new Pixel(obj, obj2, obj3);
             }
         }
 
-        public void SetAll(HSLColor color){
+        public void SetAll(PixelColor color)
+        {
             var c = color.ToRgbPixel();
-            SetAll(c.r,c.g,c.b);
+            SetAll(c.r, c.g, c.b);
         }
 
-        public void ClearAll(){
-            SetAll(0,0,0);
+        public void ClearAll()
+        {
+            SetAll(0, 0, 0);
         }
-        
-
-
     }
 
     public class Pixel : Tuple<byte, byte, byte>
